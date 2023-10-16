@@ -2,8 +2,14 @@ package hello.core.member;
 
 public class MemberServiceImpl implements  MemberService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    //private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+    //MemberServiceImpl 입장에서는 무엇으로 초기화될지 모름
+    // 오로지 책임자 역할인 AppConfig이 관리
 
+    public MemberServiceImpl(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
     @Override
     public void join(Member member) {
         memberRepository.save(member);

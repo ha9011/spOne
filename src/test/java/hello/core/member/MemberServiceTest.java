@@ -1,5 +1,6 @@
 package hello.core.member;
 
+import hello.core.AppConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberServiceImpl(); // 이 부분 주의!!!
+    AppConfig appConfig = new AppConfig();
+    MemberService memberService = appConfig.memberService(); // 이 부분 주의!!!
 
     @Test
     public void Join() throws Exception{
