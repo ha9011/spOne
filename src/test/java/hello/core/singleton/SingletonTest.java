@@ -29,4 +29,25 @@ public class SingletonTest {
 
         assertThat(memberService1).isNotSameAs(memberService2);
     }
+
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+    public void singletonServiceTest() throws Exception{
+        //given
+
+        // 프라이벗 생성자로 만들었기 떄문에, 인스턴스화 불가
+        //SingletonService singletonService = new SingletonService();
+
+        // 싱글톤 패턴으로 생성했기에 상대주소가 같다.
+        SingletonService instance1 = SingletonService.getInstance();
+        SingletonService instance2 = SingletonService.getInstance();
+
+        System.out.println("instance1 : " + instance1);
+        System.out.println("instance2 : " + instance2);
+
+        assertThat(instance1).isSameAs(instance2);
+        // isSameAs : ==
+        // isEqualTo : equal
+
+    }
 }
