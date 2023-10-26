@@ -26,13 +26,13 @@ public class AppConfig2 {
     }
 
     @Bean
-    private static DiscountPolicy discountPolicy2() {
+    protected DiscountPolicy discountPolicy2() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
     }
 
     @Bean
-    private static MemberRepository memberRepository2() {
+    protected static MemberRepository memberRepository2() {
         return new MemoryMemberRepository();
     }
 }
