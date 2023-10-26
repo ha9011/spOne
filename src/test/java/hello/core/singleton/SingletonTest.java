@@ -4,6 +4,8 @@ import hello.core.AppConfig;
 import hello.core.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -48,6 +50,30 @@ public class SingletonTest {
         assertThat(instance1).isSameAs(instance2);
         // isSameAs : ==
         // isEqualTo : equal
+
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    public void springContainer() throws Exception{
+        //given
+        //AppConfig appConfig = new AppConfig(); <- 스프링으로 바꾸기 (아래 코드)
+        ApplicationContext ac =new AnnotationConfigApplicationContext(AppConfig.class);
+
+        /* 상위 pureContainer TEXT와 비교해볼것 */
+
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+
+        //when
+        /* 참조값이 값이 같음
+        * memberservice 1 : hello.core.member.MemberServiceImpl@793f29ff
+          memberservice 2 : hello.core.member.MemberServiceImpl@74d1dc36
+         * * */
+        System.out.println("memberservice 1 : " + memberService1);
+        System.out.println("memberservice 2 : " + memberService2);
+
+        assertThat(memberService1).isSameAs(memberService2);
 
     }
 }
