@@ -49,7 +49,7 @@ public class AppConfig {
         return new RateDiscountPolicy();
     }
 
-    @Bean
+    @Bean // 왜 private static 하면 객체가 다르게 될까.
     public  MemberRepository memberRepository() {
         System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();

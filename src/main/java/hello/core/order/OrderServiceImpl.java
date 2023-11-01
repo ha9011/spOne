@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
@@ -15,8 +18,10 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy ;
 
 
+
     //OrderServiceImpl 입장에서는 무엇으로 초기화될지 모름
     // 오로지 책임자 역할인 AppConfig이 관리
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

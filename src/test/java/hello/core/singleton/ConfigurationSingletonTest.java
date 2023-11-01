@@ -39,4 +39,24 @@ public class ConfigurationSingletonTest {
 
         //then
     }
+
+    @Test
+    public void configurationDeep() throws Exception{
+        //given
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class); // <-AppConfig.class 얘도 같이 등록이됨
+
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+
+        System.out.println("bean = " + bean.getClass());
+
+        // -> 순수한 클레스라면 bean = class hello.core.AppConfig 이렇게만 나와야한다.
+        // bean = class hello.core.AppConfig$$EnhancerBySpringCGLIB$$d4b41347
+        // => 위 처럼 바이트코드를 조작한 다른 클래스가 임의로 생성되며, 해당 클래스를 대신한다.
+        // 변경된 클래스는 매우 복잡한 코드이며, 간단하게는
+        // 이미 컨테이너에 등록 빈이 있다면, 빈을 호출하고, 없다면 새로 생성해서 호출한다
+        // 이러한 소스 때문에 인스턴스화를 계속 하지않고 계속 같은 싱글톤 대로 호출하게 된다.
+
+        // @Configuration 을 안붙이면 빈은 등록되지만 싱글톤은 되지 않는다.
+    }
 }
